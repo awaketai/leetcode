@@ -9,7 +9,7 @@ import (
 // Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n.
 
 func main()  {
-	numTrees(19)
+	numTrees(8)
 }
 
 func numTrees(n int) int {
@@ -17,12 +17,12 @@ func numTrees(n int) int {
 	//res := count(1,n,mem)
 	//fmt.Println(res,mem)
 	//return res
-	res := cal(n)
+	res := catalan(n)
 	fmt.Println(res)
 	return res
 }
 
-// 
+// 动态规划推导
 func cal(n int) int {
 	var arr = make([]int,n+1)
 	arr[0],arr[1] = 1,1
@@ -32,6 +32,15 @@ func cal(n int) int {
 		}
 	}
 	return arr[n]
+}
+
+// 卡塔兰数
+func catalan(n int) int {
+	C := 1
+	for i := 0;i < n;i++ {
+		C = C * 2 * ( 2 * i + 1) / (i + 2)
+	}
+	return C
 }
 
 // 递归执行时间太长
