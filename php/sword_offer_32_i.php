@@ -39,6 +39,31 @@ class Solution {
         return $res;
     }
 
+    // 剑指 Offer 32 - II. 从上到下打印二叉树 II
+    function t($root){
+        if($root == null){
+            return [];
+        }
+        $res = [];
+        $queue = [$root];
+        while (count($queue) > 0){
+            $tmp = [];
+            for($i = count($queue);$i > 0;$i--){
+                $node = $queue[0];
+                $queue = array_slice($queue,1);
+                $tmp[] = $node->val;
+                if($node->left){
+                    $queue[] = $node->left;
+                }
+                if($node->right){
+                    $queue[] = $node->right;
+                }
+            }
+            $res[] = $tmp;
+        }
+        return $res;
+    }
+
     function node(){
         $node = new TreeNode(3);
         $node->left = new TreeNode(9);
@@ -51,4 +76,4 @@ class Solution {
 
 $obj = new Solution();
 $ret = $obj->levelOrder($obj->node());
-var_dump($ret);
+print_r($ret);
