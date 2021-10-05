@@ -21,22 +21,46 @@ class Solution {
      * @return Integer
      */
     function maxSubArray($nums) {
-        // 动态规划解法
-        $res = 0;
+        // 方法一：
         $len = count($nums);
-        $maxSum = $nums[0];
+        $sum = $maxSum = $nums[0];
         for($i = 1;$i < $len;$i++){
-            $res = max($res + $nums[$i],$nums[$i]);
-            $maxSum = max($maxSum,$res);
+            if($sum <= 0){
+                $sum = $nums[$i];
+            }else{
+                $sum += $nums[$i];
+            }
+            if($sum > $maxSum){
+                $maxSum = $sum;
+            }
         }
         return $maxSum;
     }
+
+    // 方法二：动态规划
+    function maxSubArray2($nums){
+        $len = count($nums);
+        $dp[0] = $nums[0];
+        $sum = $dp[0];
+        for($i = 1;$i < $len;$i++){
+            if($dp[$i - 1] <= 0){
+                $dp[$i] = $nums[$i];
+            }else{
+                $dp[$i] = $dp[$i - 1] + $nums[$i];
+            }
+            if($sum < $dp[$i]){
+                $sum = $dp[$i];
+            }
+        }
+        return $sum;
+    }
 }
 
-$nums1 = [-2,1,-3,4,-1,2,1,-5,4];
-$nums2 = [1];
-$nums3 = [-1];
-$nums4 = [1,2];
+$nums1 = [-2,1,-3,4,-1,2,1,-5,4]; $ret1 = 6;
+$nums2 = [1];$ret2 = 1;
+$nums3 = [-1];$ret3 = -1;
+$nums4 = [1,2];$ret4 = 3;
 $obj = new Solution();
-$ret = $obj->maxSubArray($nums4);
+$ret = $obj->maxSubArray($nums1);
 var_dump($ret);
+

@@ -21,45 +21,28 @@ func main()  {
 }
 // 1.和最接近：和减去目标值最小
 // 2.穷举
+// 最接近：差值的绝对值最小
 func threeSumClosest(nums []int, target int) int {
 	// 1.排序
 	sort.Ints(nums)
 	// 初始化结果值
 	length := len(nums)
 	res := nums[0] + nums[1] + nums[2]
-	for i := 0;i < length;i++ {
-		// 设置指针
-		left := i + 1
-		right := length - 1
-		for left < right {
-			fmt.Println(nums[i],nums[left],nums[right])
-			sum := nums[i] + nums[left] + nums[right]
-			// 如果结果值大于当前和，则替换
-			if math.Abs(float64(target - sum)) < math.Abs(float64(target - res)) {
+	for i := 0;i < length-2;i++ {
+		start,end := i+1,length-1
+		for start < end {
+			sum := nums[start] + nums[end] + nums[i]
+			if math.Abs(float64(target-sum)) < math.Abs(float64(target-res)) {
 				res = sum
 			}
-			if sum == target {
-				return sum
-			}
 			if sum > target {
-				right--
-				// 解决元素重复nums[right]重复
-				for left != right && nums[right] == nums[right + 1] {
-					right--
-				}
-			}else {
-				left++
-				// 解决元素重复nums[left]重复
-				for left != right && nums[left] == nums[left - 1] {
-					left++
-				}
+				end--
+			}else if sum < target {
+				start++
+			}else{
+				return res
 			}
 		}
-		// 解决元素重复nums[i]重复
-		for i < len(nums) - 2 && nums[i] == nums[i + 1] {
-			i++
-		}
-
 	}
 	return res
 }
