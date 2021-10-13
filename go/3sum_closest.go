@@ -10,7 +10,7 @@ import (
 
 // Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
 
-func main()  {
+func main1()  {
 	//var nums = []int{-1,2,1,-4}
 	//var target1 = 1
 	var nums1 = []int{1,1,1,2,3}
@@ -46,3 +46,4 @@ func threeSumClosest(nums []int, target int) int {
 	}
 	return res
 }
+

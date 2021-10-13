@@ -38,22 +38,22 @@ func findRepeatNumber(nums []int) int {
 }
 
 // 使用当前数组，原地交换元素到自己对应位置
+// 原来的for按照长度循环 for i := 0;i <length这种，会导致元素漏掉
 func findRepeatNumber1(nums []int) int {
 	length := len(nums)
-	for i := 0;i < length;i++ {
-		// 如果当前索引位置是当前值，则跳过
+	i := 0
+
+	for i < length {
 		if nums[i] == i {
+			i++
 			continue
 		}
-		// 如果当前索引的值等于即将要换到数组索引位置的元素值
-		// 则已经存在重复元素
-		if nums[i] == nums[nums[i]]{
+		if nums[i] == nums[nums[i]] {
 			return nums[i]
 		}
-		// 交换元素到自己对应的索引位置
-		nums[i],nums[nums[i]] = nums[nums[i]],nums[i]
+		nums[nums[i]],nums[i] = nums[i],nums[nums[i]]
 	}
-	return 0
+	return -1
 }
 
 

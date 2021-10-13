@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"golang.org/x/text/unicode/bidi"
+	"math"
 )
 
 // 剑指 Offer 24. 反转链表
@@ -33,19 +35,15 @@ type ListNode struct {
 // 局部反转完成后，pre和cur同时往前移动一个位置
 // 循环执行上述过程，知道pre到达链表尾部
 func reverseList(head *ListNode) *ListNode {
-	if head == nil {
-		return nil
+	cur := head
+	pre := &ListNode{}
+	for cur != nil {
+		node := cur.Next // 暂存后继节点
+		cur.Next = pre
+		pre = cur
+		cur = node
 	}
-	pre,cur := head,&ListNode{}
-	for pre != nil {
-		pre.Next = cur
-
-
-	}
-
-
-
-
+	return pre
 }
 
 func listToSlice(head *ListNode)  {
