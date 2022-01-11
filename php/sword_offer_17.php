@@ -48,3 +48,10 @@ $s_b = $s_a;
 $s_a = 'bcd';
 
 echo $s_b;
+
+echo PHP_EOL;
+
+$s_a = 'abc';
+$s_b = &$s_a;
+$s_a = 'bcd';
+echo $s_b;

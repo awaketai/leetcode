@@ -8,7 +8,7 @@ import "fmt"
 // 那么对应的输出是重复的数字2或者3
 
 // 抽屉原理：有十个苹果，将其放入9个抽屉，总有一个抽屉一定是要放两个苹果的
-
+// 没看懂，需要再次回头看
 func duplicationInArrayNoEdit(nums []int) int {
 	start,end := 1,len(nums) - 1
 	for start <= end {
